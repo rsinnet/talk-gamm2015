@@ -1,0 +1,60 @@
+%
+%%%%%%%%% Do not modify anything here inside
+\documentclass[english]{article}
+\usepackage[a4paper]{geometry}
+\geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
+
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{babel}
+
+\begin{document}
+%%%%%%%%%   Your contribution (Title and authors) starts from here
+
+\title{Optimal Energy-Based Control of Hybrid Systems\\ with Applications to
+  Robotic Walking}
+
+\author{\underline{Ryan W. Sinnet} and Aaron D. Ames \\
+  Texas A\&M University}%
+  %\\%Affiliation of author2}
+
+
+%%%%%%%%% Do not modify anything here inside
+\date{}
+\maketitle
+\thispagestyle{empty}
+%%%%%%%%%   Your contribution (Abstract content) starts from here
+
+    This presentation discusses a method of energy shaping applicable to non-smooth
+    mechanical systems.
+    %
+    By utilizing energy level sets in periodic behaviors, energy shaping
+    alters the stability properties of a mechanical system with the goal of
+    achieving more desirable robustness and convergence characteristics.
+    % 
+    Through the use of control Lyapunov functions, this method seeks to shape
+    the energy dynamics of a system while providing a formal guarantee on stability.
+    %
+    In particular, given a hybrid system with an exponentially stable limit
+    cycle representing a periodic behavior, the application of energy shaping
+    will exponentially stabilize the energy dynamics to a specified reference
+    level while maintaining exponential stability of the overall hybrid system.
+    %
+    The provided controller is applicable to a wide class of mechanical systems
+    including bipedal locomotion.
+    %
+    Moreover, the controller involves an optimization problem which is
+    formulated as a quadratic program operating on a convex set, thereby
+    permitting the use of existing tools for rapidly evaluating the solution.
+    %
+    Numerical simulations are provided to demonstrate the application and
+    usefulness of energy shaping.
+ \cite{Sinnet2014}
+
+\bibliographystyle{plain}
+\bibliography{myrefs}
+
+\end{document}

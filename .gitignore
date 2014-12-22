@@ -1,0 +1,15 @@
+*.aux
+*.ps
+*.dvi
+*.log
+*.bbl
+*.blg
+*.lof
+*.lot
+*.out
+*.toc
+*.tdo
+gamm2015_sinnet_ames.pdf
+*.bak
+auto/
+myrefs.bib
