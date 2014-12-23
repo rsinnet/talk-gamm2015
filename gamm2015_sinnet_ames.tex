@@ -10,6 +10,13 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{babel}
+\usepackage{color}
+
+\usepackage[dvips]{epsfig}    % or this line, depending on which
+\graphicspath{{figs/}}
+\DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 \begin{document}
 %%%%%%%%% Your contribution (Title and authors) starts from here
@@ -43,65 +50,20 @@ The primary focus is on recent results \cite{Sinnet2015,Sinnet2015a} which
 demonstrate an optimal controller for stabilizing the energy dynamics of
 periodic behaviors in hybrid mechanical system while maintaining exponential
 stability of the overall hybrid systems.
-
 %
-%The principles involved rely on the well-developed analytical mechanics methods
-%of Lagrange as well as the body of literature on stability which centers around
-%the ideas presented by Lyapunov.
-%
-In order to apply energy shaping, one begins with an autonomous hybrid
-mechanical system which contains a locally exponentially stable periodic orbit,
-possibly induced by some feedback control law.
-%
-For systems of this type, a conserved energy quantity exists through the
-continuous dynamics and it comprises kinetic and potential energy as well as an
-additional term.
-%
-This additional term can be treated with a storage function which tracks the
-energy flowing out of the system; such energy flow occurs due to
-non-conservative forcing.
-%
-For periodic behaviors, this conserved quantity is also periodic and, by
-resetting the storage function appropriately through the discrete dynamics, can
-be made to be a constant.
-%
-Using the conserved quantity, which is a function of the system state, and its
-constant reference level, one can design an energy shaping controller to drive
-the conserved energy of the system to the reference level, thereby stabilizing
-the system's energy dynamics.
-%
-The particular approach discussed achieves this energy stabilization through the
-use of a {\em control Lyapunov function (CLF)} \cite{Freeman1996}.
-%
-Roughly speaking, one must choose control inputs such that the energy of the
-system is exponentially stable through the continuous dynamics.
-%
-Because the CLF is affine with respect to the control input, the problem can be
-posed as a quadratic program operating on a convex set which results in an
-optimal controller that can be evaluated with relatively low computational
-cost.
-%
-In addition to being easy to solve, this formulation confers the added benefit
-of allowing torque limitations as well as constraints on friction and on ground
-reaction forces, although doing so may destroy feasibility.
-%
-With no constraints, the solution is feasible and is known in closed form, often
-referred to as the pointwise min-norm controller \cite{Freeman1996}.
-
-%In particular, given a hybrid system with an exponentially stable limit
-%cycle representing a periodic behavior, the application of energy shaping
-%will exponentially stabilize the energy dynamics to a specified reference
-%level while maintaining exponential stability of the overall hybrid system.
-% 
-%The presented control strategy is applicable to a wide class of mechanical
-%systems including bipedal locomotion.
-% 
-%Moreover, the controller involves an optimization problem which is formulated as
-%a quadratic program operating on a convex set, thereby permitting the use of
-%existing tools for rapidly evaluating the solution.
-% 
-%Numerical simulations are provided to demonstrate the application and
-%usefulness of energy shaping.
+%The non-smooth mechanical system can be modeled as a system with impulse effects
+%of the form
+%\begin{align*}
+%  \Sigma = \left\{
+%    \begin{array}{l l}
+%      {\dot x} = f(x), & x^{-} \in \mathcal{D} \setminus \mathcal{S},\\
+%      x^{+} = \Delta(x^{-}), & x^{-} \in \mathcal{S},
+%    \end{array}\right.
+%\end{align*}
+%where $\mathcal{D}$ is the domain of admissibility and $\mathcal{S}$ is the
+%switching surface and $x^{-}(t) = \lim_{\tau \nearrow t} x(\tau)$ and $x^{+}(t) =
+%\lim_{\tau \searrow t} x(\tau)$ are the left and right limits of the solution
+%$x(t)$, respectively.
 
 The development of energy shaping approaches spans the past few decades
 although energy-based approaches to analytical mechanics date back over 200
@@ -130,9 +92,9 @@ the potential energy of a passive biped walking down a slope.
 % 
 Based on this idea, Spong later provided a controller which could shape the
 total energy of a compass-gait biped and showed that the controller would
-guarantee asymptotic stability of the energy dynamics to a reference level
-through the continuous dynamics although he said nothing formal about the
-stability of the overall system.
+guarantee asymptotic stability of the energy dynamics to a reference level,
+$E_{\mathit{ref}}$, through the continuous dynamics although he said nothing
+formal about the stability of the overall system.
 %
 He later demonstrated how the ideas could be extended to non-conservative
 systems \cite{Spong2007} by considering energy storage functions.
@@ -142,7 +104,7 @@ walking, the same method of controlled symmetries has been used as a basis for
 achieving walking in more complex models with knees and non-trivial foot action
 \cite{Sinnet2009} and has been extended to three-dimensional bipeds using
 functional Routhian reduction \cite{Sinnet2009a}.
-
+%
 The energy shaping problem, as formulated herein, falls under a class of
 problems involving stability of systems with zero dynamics.
 %
@@ -171,6 +133,83 @@ discrete transitions and so impacts actually act as a stabilizing influence.
 %Thus, while the problems are somewhat similar, they also have their differences
 %and are applicable to different types of systems.
 
+
+%
+%The principles involved rely on the well-developed analytical mechanics methods
+%of Lagrange as well as the body of literature on stability which centers around
+%the ideas presented by Lyapunov.
+%
+In order to apply energy shaping, one begins with an autonomous hybrid
+mechanical system with state $x = (q, {\dot q})$ which contains a locally
+exponentially stable periodic orbit, possibly induced by some feedback control
+law.
+%
+For systems of this type, a conserved energy quantity exists through the
+continuous dynamics and it comprises kinetic and potential energy as well as an
+additional term.
+%
+This additional term can be treated with a storage function which tracks the
+energy flowing out of the system; such energy flow occurs due to
+non-conservative forcing.
+%
+For periodic behaviors, this conserved quantity, expressed as
+\begin{align*}
+  E_{c} = T(q, {\dot q}) + U(q) - \int_{0}^{t} \! F_{\mathit{nc}}(q(\tau), {\dot
+    q}(\tau)) \cdot \frac{dq(\tau)}{d\tau} \ d\tau
+\end{align*}
+with the terms respectively representing kinetic energy, potential energy, and
+stored energy, is also periodic and, by resetting the storage function
+appropriately through the discrete dynamics, can be made to be a constant.
+%
+Using the conserved quantity, which is a function of the system state, and its
+constant reference level, one can design an energy shaping controller to drive
+the conserved energy of the system to the reference level, thereby stabilizing
+the system's energy dynamics.
+%
+The particular approach discussed achieves this energy stabilization through the
+use of a {\em control Lyapunov function (CLF)} \cite{Freeman1996}.
+%
+Roughly speaking, one must choose control inputs such that the energy of the
+system is exponentially stable through the continuous dynamics.
+%
+This is done by constructing the CLF: $V_{\varepsilon}(q, {\dot q}) = (E_{c} -
+E_{c})^{2}$.
+%
+Because ${\dot V}(q, {\dot q}, u)$ is affine with respect to the control input, the problem can be
+posed as a quadratic program operating on a convex set:
+\begin{align*}
+  \mu_{\varepsilon}(q, {\dot q}) = \argmin_{u(q, {\dot q}) \in \mathbb{R}^{m}} \
+  & u^T(q, {\dot q}) \, u(q, {\dot q})\\
+  \mbox{s.t. } L_{f} V_{\varepsilon} &(q, {\dot q}) + L_{g} V_{\varepsilon}(q,
+  {\dot q}) \, u(q, {\dot q}) +
+  \frac{c_{3}}{\varepsilon} V_{\varepsilon}(q, {\dot q}) \leq 0.
+\end{align*}
+This results in an optimal controller that can be evaluated with relatively low
+computational cost.
+%
+In addition to being easy to solve, this formulation confers the added benefit
+of allowing torque limitations as well as constraints on friction and on ground
+reaction forces, although doing so may destroy feasibility.
+%
+With no constraints, the solution is feasible and is known in closed form, often
+referred to as the pointwise min-norm controller \cite{Freeman1996}.
+
+%In particular, given a hybrid system with an exponentially stable limit
+%cycle representing a periodic behavior, the application of energy shaping
+%will exponentially stabilize the energy dynamics to a specified reference
+%level while maintaining exponential stability of the overall hybrid system.
+% 
+%The presented control strategy is applicable to a wide class of mechanical
+%systems including bipedal locomotion.
+% 
+%Moreover, the controller involves an optimization problem which is formulated as
+%a quadratic program operating on a convex set, thereby permitting the use of
+%existing tools for rapidly evaluating the solution.
+% 
+%Numerical simulations are provided to demonstrate the application and
+%usefulness of energy shaping.
+
+
 In contrast to its predecessors, it has been formally shown that the presented
 controller maintains exponential stability of the hybrid system to which it is
 applied for small enough control gains.
@@ -188,6 +227,28 @@ Despite the lack of formal claims with respect to global properties, the local
 stability properties are practically useful when using energy shaping as a
 stabilizing controller in operating regions around the desired behavior.
 %
+
+\begin{figure}
+  \centering
+  \def\svgwidth{0.25\columnwidth}
+  \input{figs/cg2d-slope-model.eps_latex} \hspace{3em}
+  \includegraphics[width=0.45\columnwidth]{cg-energy-comp}
+  \caption{Compass-gait biped on a slope (left), energy convergence in
+    simulations for passive system and shaped systems with different gains (right).}
+  \label{fig:simulation-model}
+  \vspace{-1em}
+\end{figure}
+
+%\begin{figure}[t!]
+%  \centering
+%  \includegraphics[width=0.49\columnwidth]{hybrid_cart_spring_phase_portrait}
+%  \includegraphics[width=0.49\columnwidth]{hybrid_cart_spring_es_phase_portrait}
+%  \caption{%
+%    Phase portrait for a simulation of a nominal cart--spring system (left) and
+%    shaped system (right).%
+%  }
+%  \label{fig:cart_spring_simulation}
+%\end{figure}
 
 \bibliographystyle{plain}
 \bibliography{myrefs}

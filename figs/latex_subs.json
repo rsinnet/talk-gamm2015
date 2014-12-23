@@ -1,0 +1,121 @@
+{
+    "files": [
+	{
+	    "cg2d_reduced_coordinates":
+	    {
+		"fy": "$\\phi_{b}^{y}$",
+		"q": "$q_{1}$",
+		"Rb": "$R_{b}$",
+		"x": "$x$",
+		"z": "$z$"
+	    }
+	},
+	{
+	    "simple_hybrid_system":
+	    {
+		"D": "$D$",
+		"R": "$\\Delta$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$",
+		"S": "$S$"
+	    }
+	},
+	{
+	    "poincare_return_map":
+	    {
+		"D": "$D$",
+		"S": "$S$",
+		"Dx": "$\\chi_1 = \\Delta(\\phi_{T_{I}(\\chi_0)}(\\chi_0))$",
+		"x0": "$\\chi_0$",
+		"x1": "$\\chi_1$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$",
+		"fx0": "$\\phi_{T_{I}(\\chi_0)}(\\chi_0)$",
+		"ftx0": "$\\phi_t(\\chi_0)$",
+		"ftx1": "$\\phi_t(\\chi_1)$"
+	    }
+	},
+	{
+	    "poincare_map":
+	    {
+		"D": "$D$",
+		"S": "$S$",
+		"Dx": "$\\chi_1 = \\Delta(\\chi_0)$",
+		"x0": "$\\chi_0$",
+		"x1": "$\\chi_1$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$",
+		"ftx0": "$\\phi_t(\\chi_0)$",
+		"ftx1": "$\\phi_t(\\chi_1)$"
+	    }
+	},
+	{
+	    "hybrid_periodic_orbit":
+	    {
+		"D": "$D$",
+		"G": "$S$",
+		"Dx": "$\\Delta(\\chi^*)$",
+		"xstar": "$\\chi^*$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$"
+	    }
+	},
+	{
+	    "cg2d-7link-model":
+	    {
+		"q1": "$q_1$",
+		"q2": "$q_2$",
+		"q3": "$q_3$",
+		"q4": "$q_4$",
+		"q5": "$q_5$",
+		"q6": "$q_6$",
+		"q7": "$q_7$",
+		"M": "$\\mathcal{M}_T$",
+		"mc": "$\\mathcal{M}_c$",
+		"mt": "$\\mathcal{M}_t$",
+		"mf": "$\\mathcal{M}_f$"
+	    }
+	},
+	{
+	    "cg2d-5link-model":
+	    {
+		"q1": "$q_1$",
+		"q2": "$q_2$",
+		"q3": "$q_3$",
+		"q4": "$q_4$",
+		"q5": "$q_5$",
+		"M": "$M$",
+		"mc": "$m_c$",
+		"mt": "$m_t$"
+	    }
+	},
+	{
+	    "cg2d-3link-model":
+	    {
+		"q1": "$q_1$",
+		"q2": "$q_2$",
+		"q3": "$q_3$",
+		"M": "$M$",
+		"mc": "$m_c$",
+		"mt": "$m_t$"
+	    }
+	},
+	{
+	    "cg2d-slope-model":
+	    {
+		"q1": "$q_2$",
+		"q2": "$q_1$",
+		"M": "$M$",
+		"m": "$m$",
+		"l": "$\\ell / 2$",
+		"y": "$\\gamma$"
+	    }
+	},
+	{
+	    "cg2d-2link-model":
+	    {
+		"q1": "$q_1$",
+		"q2": "$q_2$",
+		"M": "$M$",
+		"mc": "$m_c$",
+		"mt": "$m_t$"
+	    }
+	}
+    ]
+}
