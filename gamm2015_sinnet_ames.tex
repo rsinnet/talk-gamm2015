@@ -1,4 +1,4 @@
-%
+% 
 %%%%%%%%% Do not modify anything here inside
 \documentclass[english]{article}
 \usepackage[a4paper]{geometry}
@@ -12,47 +12,108 @@
 \usepackage{babel}
 
 \begin{document}
-%%%%%%%%%   Your contribution (Title and authors) starts from here
+%%%%%%%%% Your contribution (Title and authors) starts from here
 
 \title{Optimal Energy-Based Control of Hybrid Systems\\ with Applications to
   Robotic Walking}
 
 \author{\underline{Ryan W. Sinnet} and Aaron D. Ames \\
   Texas A\&M University}%
-  %\\%Affiliation of author2}
+% \\%Affiliation of author2}
 
 
 %%%%%%%%% Do not modify anything here inside
 \date{}
 \maketitle
 \thispagestyle{empty}
-%%%%%%%%%   Your contribution (Abstract content) starts from here
+%%%%%%%%% Your contribution (Abstract content) starts from here
 
-    This presentation discusses a method of energy shaping applicable to non-smooth
-    mechanical systems.
-    %
-    By utilizing energy level sets in periodic behaviors, energy shaping
-    alters the stability properties of a mechanical system with the goal of
-    achieving more desirable robustness and convergence characteristics.
-    % 
-    Through the use of control Lyapunov functions, this method seeks to shape
-    the energy dynamics of a system while providing a formal guarantee on stability.
-    %
-    In particular, given a hybrid system with an exponentially stable limit
-    cycle representing a periodic behavior, the application of energy shaping
-    will exponentially stabilize the energy dynamics to a specified reference
-    level while maintaining exponential stability of the overall hybrid system.
-    %
-    The provided controller is applicable to a wide class of mechanical systems
-    including bipedal locomotion.
-    %
-    Moreover, the controller involves an optimization problem which is
-    formulated as a quadratic program operating on a convex set, thereby
-    permitting the use of existing tools for rapidly evaluating the solution.
-    %
-    Numerical simulations are provided to demonstrate the application and
-    usefulness of energy shaping.
- \cite{Sinnet2014}
+This presentation discusses a class of methods known collectively as {\em energy
+  shaping}.
+%
+These methods share the common approach of utilizing the structure of energy to
+create stabilizing controllers for periodic behaviors in dynamical systems.
+%
+The primary focus is on a recent method which provides an optimal controller for
+stabilizing the energy dynamics of periodic behaviors in hybrid mechanical
+system while maintaining exponential stability of the overall hybrid system.
+%
+The principles involved rely on the well-developed analytical mechanics methods
+of Lagrange as well as the body of literature on stability which centers around
+the ideas presented by Lyapunov.
+% 
+Through the use of control Lyapunov functions, this method seeks to shape
+the energy dynamics of a system while providing a formal guarantee on stability.
+% 
+In particular, given a hybrid system with an exponentially stable limit
+cycle representing a periodic behavior, the application of energy shaping
+will exponentially stabilize the energy dynamics to a specified reference
+level while maintaining exponential stability of the overall hybrid system.
+% 
+The presented control strategy is applicable to a wide class of mechanical
+systems including bipedal locomotion.
+% 
+Moreover, the controller involves an optimization problem which is formulated as
+a quadratic program operating on a convex set, thereby permitting the use of
+existing tools for rapidly evaluating the solution.
+% 
+%Numerical simulations are provided to demonstrate the application and
+%usefulness of energy shaping.
+
+% 
+The ideas herein build on existing results spread throughout the literature.
+%
+Over the last few decades, researchers have presented control schemes which seek
+to achieve periodic behaviors in dynamical systems by formulating their control
+objectives in terms of the energy of a system.
+%
+Based on McGeer's observation that compass-gait bipeds with appropriate mass
+distributions can walk down shallow slopes without actuation \cite{McGeer1990},
+Spong presented controlled symmetries \cite{Spong2005} as a method for obtaining
+walking on a compass-gait biped on flat ground by injecting energy in a such a
+way that the shaped potential energy of the robot's gait on flat ground mimicked
+the potential energy of a passive biped walking down a slope.
+% 
+Based on this idea, Spong later provided a controller which could shape the
+total energy of a compass-gait biped and showed that the controller would
+guarantee asymptotic stability of the energy dynamics to a reference level
+through the continuous dynamics.
+%
+He later demonstrated how the ideas could be extended to non-conservative
+systems \cite{Spong2007} by considering energy storage functions.
+%
+Similarly, the authors of this presentation have extended the Spong's ideas on
+controlled symmetries to three-dimensional bipeds through the use of functional
+Routhian reduction \cite{Grizzle2014}.
+
+
+The problem of interest in this paper falls under a class of problems involving
+stability of systems with zero dynamics.
+%
+In \cite{Ames2014}, a similar problem was considered in which a stabilizing
+control law was constructed using control Lyapunov functions to stabilize to a
+zero dynamics which exhibited hybrid invariance; that is, for initial conditions
+on the intersection of the switching surface and the hybrid zero dynamics
+manifold, application of the reset map will result in a state which is still on
+the hybrid zero dynamics.
+%
+This was a key assumption underlying \cite{Ames2014} but this assumption does
+not hold for energy shaping as energy is generally not invariant through impact,
+though there may be pathological examples which demonstrate this property.
+%
+In fact, for certain conservative systems like the compass-gait biped, which
+exhibits local exponential stability, energy change can only occur through
+discrete transitions and so impacts actually act as a stabilizing influence.
+%
+Another key difference is the assumption of stability which is necessary for the
+application of energy shaping.
+%
+Whereas \cite{Ames2014} requires stability of the system for states restricted
+to the hybrid zero dynamics, this paper requires stability of the nominal system
+and does not require hybrid invariance of the zero dynamics.
+%
+Thus, while the problems are somewhat similar, they also have their differences
+and are applicable to different types of systems.
 
 \bibliographystyle{plain}
 \bibliography{myrefs}
