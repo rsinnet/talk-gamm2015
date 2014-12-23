@@ -67,8 +67,8 @@ be made to be a constant.
 %
 Using the conserved quantity, which is a function of the system state, and its
 constant reference level, one can design an energy shaping controller to drive
-the system conserved energy of the system to the reference level, thereby
-stabilizing the energy dynamics of the system.
+the conserved energy of the system to the reference level, thereby stabilizing
+the system's energy dynamics.
 %
 The particular approach discussed achieves this energy stabilization through the
 use of a {\em control Lyapunov function (CLF)} \cite{Freeman1996}.
@@ -81,6 +81,12 @@ posed as a quadratic program operating on a convex set which results in an
 optimal controller that can be evaluated with relatively low computational
 cost.
 %
+In addition to being easy to solve, this formulation confers the added benefit
+of allowing torque limitations as well as constraints on friction and on ground
+reaction forces, although doing so may destroy feasibility.
+%
+With no constraints, the solution is feasible and is known in closed form, often
+referred to as the pointwise min-norm controller \cite{Freeman1996}.
 
 %In particular, given a hybrid system with an exponentially stable limit
 %cycle representing a periodic behavior, the application of energy shaping
@@ -101,38 +107,44 @@ The development of energy shaping approaches spans the past few decades
 although energy-based approaches to analytical mechanics date back over 200
 years to the work of Lagrange
 % \cite{Lagrange1788}
-and the principles of stability utilized were first presented by Lyapunov
+and the principles of stability involved were first presented by Lyapunov
 % \cite{Lyapunov1992}
 over 100 years ago.
 % 
-The ideas herein build on existing results spread throughout the literature.
+The ideas herein also build on more recent results spread throughout the literature.
 %
 Over the last few decades, researchers have presented control schemes which seek
-to achieve periodic behaviors in dynamical systems by formulating their control
-objectives in terms of the energy of a system.
+to achieve periodic behaviors in dynamical systems and bipedal walking in
+particular by formulating their control objectives in terms of the energy of a
+system.
 %
 Based on McGeer's observation that compass-gait bipeds with appropriate mass
 distributions can walk down shallow slopes without actuation \cite{McGeer1990},
-Spong presented controlled symmetries \cite{Spong2005} as a method for obtaining
+Spong presented controlled symmetries \cite{Spong2007} as a method for obtaining
 walking on a compass-gait biped on flat ground by injecting energy in a such a
 way that the shaped potential energy of the robot's gait on flat ground mimicked
 the potential energy of a passive biped walking down a slope.
+%
+% controlled symmetries appeared earlier, but using Spong2007, we can reduce the
+% references.
 % 
 Based on this idea, Spong later provided a controller which could shape the
 total energy of a compass-gait biped and showed that the controller would
 guarantee asymptotic stability of the energy dynamics to a reference level
-through the continuous dynamics.
+through the continuous dynamics although he said nothing formal about the
+stability of the overall system.
 %
 He later demonstrated how the ideas could be extended to non-conservative
 systems \cite{Spong2007} by considering energy storage functions.
 %
-Similarly, the authors of this presentation have extended Spong's ideas on
-controlled symmetries to three-dimensional bipeds through the use of functional
-Routhian reduction \cite{Grizzle2014}.
+While the compass-gait biped is of interest as a low-dimensional example of
+walking, the same method of controlled symmetries has been used as a basis for
+achieving walking in more complex models with knees and non-trivial foot action
+\cite{Sinnet2009} and has been extended to three-dimensional bipeds using
+functional Routhian reduction \cite{Sinnet2009a}.
 
-
-The problem as formulated falls under a class of problems involving stability of
-systems with zero dynamics.
+The energy shaping problem, as formulated herein, falls under a class of
+problems involving stability of systems with zero dynamics.
 %
 In \cite{Ames2014}, a similar problem was considered in which a stabilizing
 control law was constructed using control Lyapunov functions to stabilize to a
@@ -153,7 +165,7 @@ discrete transitions and so impacts actually act as a stabilizing influence.
 %application of energy shaping.
 %
 %Whereas \cite{Ames2014} requires stability of the system for states restricted
-%to the hybrid zero dynamics, this paper requires stability of the nominal system
+%to the hybrid zero dynamics, this method requires stability of the nominal system
 %and does not require hybrid invariance of the zero dynamics.
 %
 %Thus, while the problems are somewhat similar, they also have their differences
