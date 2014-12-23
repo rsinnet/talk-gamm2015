@@ -172,11 +172,11 @@ use of a {\em control Lyapunov function (CLF)} \cite{Freeman1996}.
 Roughly speaking, one must choose control inputs such that the energy of the
 system is exponentially stable through the continuous dynamics.
 %
-This is done by constructing the CLF: $V_{\varepsilon}(q, {\dot q}) = (E_{c} -
-E_{c})^{2}$.
+This is done by constructing the CLF: $V_{\varepsilon}(q, {\dot q}) = (E_{c}(q,
+{\dot q}) - E_{\mathit{ref}})^{2}$.
 %
-Because ${\dot V}(q, {\dot q}, u)$ is affine with respect to the control input, the problem can be
-posed as a quadratic program operating on a convex set:
+Because ${\dot V}(q, {\dot q}, u)$ is affine with respect to the control input,
+the problem can be posed as a quadratic program operating on a convex set:
 \begin{align*}
   \mu_{\varepsilon}(q, {\dot q}) = \argmin_{u(q, {\dot q}) \in \mathbb{R}^{m}} \
   & u^T(q, {\dot q}) \, u(q, {\dot q})\\
