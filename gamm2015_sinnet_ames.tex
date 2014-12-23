@@ -171,6 +171,24 @@ discrete transitions and so impacts actually act as a stabilizing influence.
 %Thus, while the problems are somewhat similar, they also have their differences
 %and are applicable to different types of systems.
 
+In contrast to its predecessors, it has been formally shown that the presented
+controller maintains exponential stability of the hybrid system to which it is
+applied for small enough control gains.
+%
+Although nothing is formally shown regarding the robustness of the shaped system
+to perturbations in initial conditions, simulations show that the method can
+result in a larger domain of attraction and shorter stabilization times for
+limit cycles of certain systems.
+%
+Indeed simulation results are provided for a cart--spring system to demonstrate
+improved convergence properties and for a compass-gait biped to demonstrate
+the robustness improvement that can be conferred by energy shaping.
+%
+Despite the lack of formal claims with respect to global properties, the local
+stability properties are practically useful when using energy shaping as a
+stabilizing controller in operating regions around the desired behavior.
+%
+
 \bibliographystyle{plain}
 \bibliography{myrefs}
 
