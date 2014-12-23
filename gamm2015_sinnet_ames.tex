@@ -28,38 +28,82 @@
 \thispagestyle{empty}
 %%%%%%%%% Your contribution (Abstract content) starts from here
 
-This presentation discusses a class of methods known collectively as {\em energy
-  shaping}.
+Over the last fifty years, researchers have tackled the problem of bipedal
+robotic locomotion using a range of approaches with varying degrees of
+formality \cite{Grizzle2014}.
 %
-These methods share the common approach of utilizing the structure of energy to
-create stabilizing controllers for periodic behaviors in dynamical systems.
+In this presentation, we are interested in one particular approach known as {\em
+  energy shaping}.
 %
-The primary focus is on a recent method which provides an optimal controller for
-stabilizing the energy dynamics of periodic behaviors in hybrid mechanical
-system while maintaining exponential stability of the overall hybrid system.
+The main idea behind energy shaping approaches involves using the structure
+of energy to create stabilizing controllers for periodic behaviors in dynamical
+systems.
 %
-The principles involved rely on the well-developed analytical mechanics methods
-of Lagrange as well as the body of literature on stability which centers around
-the ideas presented by Lyapunov.
+The primary focus is on recent results \cite{Sinnet2015,Sinnet2015a} which
+demonstrate an optimal controller for stabilizing the energy dynamics of
+periodic behaviors in hybrid mechanical system while maintaining exponential
+stability of the overall hybrid systems.
+
+%
+%The principles involved rely on the well-developed analytical mechanics methods
+%of Lagrange as well as the body of literature on stability which centers around
+%the ideas presented by Lyapunov.
+%
+In order to apply energy shaping, one begins with an autonomous hybrid
+mechanical system which contains a locally exponentially stable periodic orbit,
+possibly induced by some feedback control law.
+%
+For systems of this type, a conserved energy quantity exists through the
+continuous dynamics and it comprises kinetic and potential energy as well as an
+additional term.
+%
+This additional term can be treated with a storage function which tracks the
+energy flowing out of the system; such energy flow occurs due to
+non-conservative forcing.
+%
+For periodic behaviors, this conserved quantity is also periodic and, by
+resetting the storage function appropriately through the discrete dynamics, can
+be made to be a constant.
+%
+Using the conserved quantity, which is a function of the system state, and its
+constant reference level, one can design an energy shaping controller to drive
+the system conserved energy of the system to the reference level, thereby
+stabilizing the energy dynamics of the system.
+%
+The particular approach discussed achieves this energy stabilization through the
+use of a {\em control Lyapunov function (CLF)} \cite{Freeman1996}.
+%
+Roughly speaking, one must choose control inputs such that the energy of the
+system is exponentially stable through the continuous dynamics.
+%
+Because the CLF is affine with respect to the control input, the problem can be
+posed as a quadratic program operating on a convex set which results in an
+optimal controller that can be evaluated with relatively low computational
+cost.
+%
+
+%In particular, given a hybrid system with an exponentially stable limit
+%cycle representing a periodic behavior, the application of energy shaping
+%will exponentially stabilize the energy dynamics to a specified reference
+%level while maintaining exponential stability of the overall hybrid system.
 % 
-Through the use of control Lyapunov functions, this method seeks to shape
-the energy dynamics of a system while providing a formal guarantee on stability.
+%The presented control strategy is applicable to a wide class of mechanical
+%systems including bipedal locomotion.
 % 
-In particular, given a hybrid system with an exponentially stable limit
-cycle representing a periodic behavior, the application of energy shaping
-will exponentially stabilize the energy dynamics to a specified reference
-level while maintaining exponential stability of the overall hybrid system.
-% 
-The presented control strategy is applicable to a wide class of mechanical
-systems including bipedal locomotion.
-% 
-Moreover, the controller involves an optimization problem which is formulated as
-a quadratic program operating on a convex set, thereby permitting the use of
-existing tools for rapidly evaluating the solution.
+%Moreover, the controller involves an optimization problem which is formulated as
+%a quadratic program operating on a convex set, thereby permitting the use of
+%existing tools for rapidly evaluating the solution.
 % 
 %Numerical simulations are provided to demonstrate the application and
 %usefulness of energy shaping.
 
+The development of energy shaping approaches spans the past few decades
+although energy-based approaches to analytical mechanics date back over 200
+years to the work of Lagrange
+% \cite{Lagrange1788}
+and the principles of stability utilized were first presented by Lyapunov
+% \cite{Lyapunov1992}
+over 100 years ago.
 % 
 The ideas herein build on existing results spread throughout the literature.
 %
@@ -87,8 +131,8 @@ controlled symmetries to three-dimensional bipeds through the use of functional
 Routhian reduction \cite{Grizzle2014}.
 
 
-The problem of interest in this paper falls under a class of problems involving
-stability of systems with zero dynamics.
+The problem as formulated falls under a class of problems involving stability of
+systems with zero dynamics.
 %
 In \cite{Ames2014}, a similar problem was considered in which a stabilizing
 control law was constructed using control Lyapunov functions to stabilize to a
