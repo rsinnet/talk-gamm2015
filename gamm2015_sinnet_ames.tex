@@ -4,6 +4,8 @@
 \usepackage[a4paper]{geometry}
 \geometry{verbose,tmargin=2cm,bmargin=2cm,lmargin=2cm,rmargin=2cm}
 
+\usepackage[hidelinks]{hyperref}
+
 \usepackage[T1]{fontenc}
 \usepackage[latin9]{inputenc}
 \usepackage{amsthm}
@@ -14,7 +16,7 @@
 
 \usepackage[dvips]{epsfig}    % or this line, depending on which
 \graphicspath{{figs/}}
-\DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
+\DeclareGraphicsExtensions{.pdf,.eps}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 
@@ -35,7 +37,7 @@
 \thispagestyle{empty}
 %%%%%%%%% Your contribution (Abstract content) starts from here
 
-Over the last fifty years, researchers have tackled the problem of bipedal
+Over the last fifty years, researchers have addressed the problem of bipedal
 robotic locomotion using a range of approaches with varying degrees of
 formality \cite{Grizzle2014}.
 %
@@ -46,7 +48,7 @@ The main idea behind energy shaping approaches involves using the structure
 of energy to create stabilizing controllers for periodic behaviors in dynamical
 systems.
 %
-The primary focus is on recent results \cite{Sinnet2015,Sinnet2015a} which
+The primary focus is on recent results \cite{Sinnet2015a} which
 demonstrate an optimal controller for stabilizing the energy dynamics of
 periodic behaviors in hybrid mechanical system while maintaining exponential
 stability of the overall hybrid systems.
@@ -80,12 +82,16 @@ to achieve periodic behaviors in dynamical systems and bipedal walking in
 particular by formulating their control objectives in terms of the energy of a
 system.
 %
-Based on McGeer's observation that compass-gait bipeds with appropriate mass
-distributions can walk down shallow slopes without actuation \cite{McGeer1990},
-Spong presented controlled symmetries \cite{Spong2007} as a method for obtaining
-walking on a compass-gait biped on flat ground by injecting energy in a such a
-way that the shaped potential energy of the robot's gait on flat ground mimicked
-the potential energy of a passive biped walking down a slope.
+Based on McGeer's observation that compass-gait
+bipeds\footnote{\label{fn:cg-url}%
+  Video of a compass-gait biped available online
+  \href{http://youtu.be/mwugDGGhPmI}{http://youtu.be/mwugDGGhPmI}.%
+} with appropriate mass distributions can walk down shallow slopes without
+actuation \cite{McGeer1990}, Spong presented controlled symmetries
+\cite{Spong2007} as a method for obtaining walking on a compass-gait biped on
+flat ground by injecting energy in a such a way that the shaped potential energy
+of the robot's gait on flat ground mimicked the potential energy of a passive
+biped walking down a slope.
 %
 % controlled symmetries appeared earlier, but using Spong2007, we can reduce the
 % references.
@@ -93,8 +99,8 @@ the potential energy of a passive biped walking down a slope.
 Based on this idea, Spong later provided a controller which could shape the
 total energy of a compass-gait biped and showed that the controller would
 guarantee asymptotic stability of the energy dynamics to a reference level,
-$E_{\mathit{ref}}$, through the continuous dynamics although he said nothing
-formal about the stability of the overall system.
+$E_{\mathit{ref}}$, through the continuous dynamics although nothing was
+formally established with regards to stability of the overall system.
 %
 He later demonstrated how the ideas could be extended to non-conservative
 systems \cite{Spong2007} by considering energy storage functions.
@@ -167,22 +173,21 @@ the conserved energy of the system to the reference level, thereby stabilizing
 the system's energy dynamics.
 %
 The particular approach discussed achieves this energy stabilization through the
-use of a {\em control Lyapunov function (CLF)} \cite{Freeman1996}.
+use of a {\em rapidly exponentially stabilizing control Lyapunov function (RES-CLF)} \cite{Ames2014,Freeman1996}.
 %
 Roughly speaking, one must choose control inputs such that the energy of the
 system is exponentially stable through the continuous dynamics.
 %
-This is done by constructing the CLF: $V_{\varepsilon}(q, {\dot q}) = (E_{c}(q,
-{\dot q}) - E_{\mathit{ref}})^{2}$.
+This is done by constructing the Lyapunov candidate function $V(q, {\dot q}) =
+(E_{c}(q, {\dot q}) - E_{\mathit{ref}})^{2}$.
 %
-Because ${\dot V}(q, {\dot q}, u)$ is affine with respect to the control input,
-the problem can be posed as a quadratic program operating on a convex set:
+Because ${\dot V}(q, {\dot q}, u) = L_{f} V(q, {\dot q}) + L_{g} V(q, {\dot
+  q}) \, u$ is affine with respect to the control input, the problem can be
+posed as a quadratic program operating on a convex set:
 \begin{align*}
-  \mu_{\varepsilon}(q, {\dot q}) = \argmin_{u(q, {\dot q}) \in \mathbb{R}^{m}} \
-  & u^T(q, {\dot q}) \, u(q, {\dot q})\\
-  \mbox{s.t. } L_{f} V_{\varepsilon} &(q, {\dot q}) + L_{g} V_{\varepsilon}(q,
-  {\dot q}) \, u(q, {\dot q}) +
-  \frac{c_{3}}{\varepsilon} V_{\varepsilon}(q, {\dot q}) \leq 0.
+  \mu_{\varepsilon}(q, {\dot q}) = \argmin_{u \in \mathbb{R}^{m}} & \ u^T \, u\\[-.5em]
+  &\hspace{-1.5em}\mbox{s.t. } L_{f} V (q, {\dot q}) + L_{g} V(q, {\dot q}) \, u
+  + \frac{c_{3}}{\varepsilon} V(q, {\dot q}) \leq 0.
 \end{align*}
 This results in an optimal controller that can be evaluated with relatively low
 computational cost.
@@ -214,27 +219,32 @@ In contrast to its predecessors, it has been formally shown that the presented
 controller maintains exponential stability of the hybrid system to which it is
 applied for small enough control gains.
 %
-Although nothing is formally shown regarding the robustness of the shaped system
-to perturbations in initial conditions, simulations show that the method can
-result in a larger domain of attraction and shorter stabilization times for
-limit cycles of certain systems.
+Although formal results regarding the robustness of the shaped system to
+perturbations in initial conditions have not yet been established, simulations
+show that the method can result in a larger domain of attraction and shorter
+stabilization times for limit cycles of certain systems.
 %
 Indeed simulation results are provided for a cart--spring system to demonstrate
-improved convergence properties and for a compass-gait biped to demonstrate
-the robustness improvement that can be conferred by energy shaping.
+improved convergence properties and for a compass-gait
+biped as in Figure~\ref{fig:simulation-model} to
+demonstrate the robustness improvement that can be conferred by energy shaping.
 %
 Despite the lack of formal claims with respect to global properties, the local
 stability properties are practically useful when using energy shaping as a
 stabilizing controller in operating regions around the desired behavior.
 %
+Ultimately, the goal will be to apply these methods to complex biped and
+humanoid robots with a view toward robotic--assistive devices.
 
 \begin{figure}
   \centering
-  \def\svgwidth{0.25\columnwidth}
-  \input{figs/cg2d-slope-model.eps_latex} \hspace{3em}
+  %\def\svgwidth{0.25\columnwidth}
+  %\input{figs/cg2d-slope-model.eps_latex} \hspace{3em}
+  \includegraphics[width=0.25\columnwidth]{compass-gait} \hspace{3em}
   \includegraphics[width=0.45\columnwidth]{cg-energy-comp}
   \caption{Compass-gait biped on a slope (left), energy convergence in
-    simulations for passive system and shaped systems with different gains (right).}
+    simulations for passive system and shaped systems with different gains
+    (right). Smaller values of $\varepsilon$ result in faster convergence of the energy dynamics.}
   \label{fig:simulation-model}
   \vspace{-1em}
 \end{figure}
