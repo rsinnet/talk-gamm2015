@@ -8,13 +8,21 @@ EPS_TEX := $(wildcard figs/*.eps_tex)
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))
 
+ifeq ($(OS),Windows_NT)
+  CP:=copy
+  RM:=del
+else
+  CP:=cp
+  RM:=rm -f
+endif
+
 $(PROJNAME).pdf: $(PROJNAME).ps
 	ps2pdf $<
 
-$(PROJNAME).ps: $(PROJNAME).dvi
+%.ps: %.dvi
 	dvips $<
 
-$(PROJNAME).dvi: $(PROJNAME).aux
+%.dvi: %.aux
 	$(LATEX_CMD) $(basename $<)
 	$(LATEX_CMD) $(basename $<)
 
@@ -31,7 +39,5 @@ figs/%.eps_latex: figs/%.eps_tex figs/%.eps figs/do_latex_subs.py figs/latex_sub
 .PHONY: clean
 
 clean:
-	rm -f myrefs.bib $(PROJNAME).pdf $(PROJNAME).ps \
-	$(PROJNAME).bbl $(PROJNAME).aux $(PROJNAME).dvi \
-	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out
+	$(RM) myrefs.bib $(PROJNAME).pdf *.dvi *.ps *.bbl *.aux *.out
 	$(MAKE) -C figs/ clean
