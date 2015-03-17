@@ -32,13 +32,13 @@ all: $(PROJNAME).pdf $(TALKNAME).pdf
 	$(LATEX_CMD) $(basename $<)
 	$(LATEX_CMD) $(basename $<)
 
-$(TALKNAME).pdf: $(TALKNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) $(PDF_FIGS)
-	$(PDFLATEX_CMD) $<
-	$(PDFLATEX_CMD) $<
-
 $(PROJNAME).aux: $(PROJNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) myrefs.bib
 	$(LATEX_CMD) $<
 	bibtex $(basename $<)
+
+$(TALKNAME).pdf: $(TALKNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) $(PDF_FIGS)
+	$(PDFLATEX_CMD) $<
+	$(PDFLATEX_CMD) $<
 
 myrefs.bib: refs.bib format_bibtex_months
 	./format_bibtex_months refs.bib myrefs.bib

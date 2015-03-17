@@ -5,7 +5,8 @@
 \usepackage{amssymb,amsmath,mathrsfs}
 \usepackage{catchfile,etoolbox}
 \usepackage{subfig}
-\usepackage{epsfig,psfrag,epstopdf}
+\usepackage{epsfig,psfrag}
+\usepackage[update]{epstopdf}
 
 \usepackage{graphicx}
 \graphicspath{{figs/}}
@@ -22,6 +23,10 @@
 \institute{Department of Mechanical Engineering\\ Texas A\&M University}
 \date{Monday, March 23, 2015}
 
+\makeatletter
+\def\input@path{{figs/}}
+\makeatother
+
 \begin{document}
 
 \frame{\titlepage}
@@ -31,7 +36,8 @@
 \section{Introduction}
 \showtoc
 
-\input{02_mechanics.tex}
+\input{02_mechanics}
+\input{03_energy_shaping}
 
 \section{Energy Shaping}
 \showtoc
