@@ -3,8 +3,7 @@ TALKNAME := gamm2015_sinnet_ames_talk
 LATEX_CMD := latex -interaction=nonstopmode
 PDFLATEX_CMD := pdflatex -interaction=nonstopmode
 
-TALKTEX := $(TALKNAME) 02_mechanics 03_energy_shaping
-TALKSRC := $(addsuffix .tex,$(TALKTEX))
+TALKSRC := $(TALKNAME).tex $(wildcard sections/*.tex) gamm.sty
 
 EPS_ALL := $(wildcard figs/*.eps)
 EPS_TEX := $(wildcard figs/*.eps_tex)

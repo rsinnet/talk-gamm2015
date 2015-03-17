@@ -19,4 +19,4 @@ all: $(EPS_LATEX)
 .PHONY: all clean
 
 clean:
-	$(RM) *.eps_latex *-converted-to.pdf
+	$(RM) *.eps_latex *-eps-converted-to.pdf
