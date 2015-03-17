@@ -1,7 +1,10 @@
-PROJNAME=gamm2015_sinnet_ames
-TALKNAME=gamm2015_sinnet_ames_talk
-LATEX_CMD=latex -interaction=nonstopmode
-PDFLATEX_CMD=pdflatex -interaction=nonstopmode
+PROJNAME := gamm2015_sinnet_ames
+TALKNAME := gamm2015_sinnet_ames_talk
+LATEX_CMD := latex -interaction=nonstopmode
+PDFLATEX_CMD := pdflatex -interaction=nonstopmode
+
+TALKTEX := $(TALKNAME) 02_mechanics 03_energy_shaping
+TALKSRC := $(addsuffix .tex,$(TALKTEX))
 
 EPS_ALL := $(wildcard figs/*.eps)
 EPS_TEX := $(wildcard figs/*.eps_tex)
@@ -36,7 +39,7 @@ $(PROJNAME).aux: $(PROJNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) myrefs.bib
 	$(LATEX_CMD) $<
 	bibtex $(basename $<)
 
-$(TALKNAME).pdf: $(TALKNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) $(PDF_FIGS)
+$(TALKNAME).pdf: $(TALKSRC) $(EPS_LATEX) $(EPS_NO_LATEX) $(PDF_FIGS)
 	$(PDFLATEX_CMD) $<
 	$(PDFLATEX_CMD) $<
 
