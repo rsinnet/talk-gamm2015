@@ -1,0 +1,518 @@
+\newcommand{\newgetenv}[2][]{%
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1\relax}
+  \if\relax\detokenize{#1}\relax\temp\else\edef#1{\temp}\fi%
+}%
+
+\newgetenv[\PRELIMSECA]{PRELIMSECA}%
+\newgetenv[\PRELIMSECB]{PRELIMSECB}%
+\newgetenv[\PRELIMSECC]{PRELIMSECC}%
+\newgetenv[\PRELIMSECD]{PRELIMSECD}%
+\newgetenv[\PRELIMSECE]{PRELIMSECE}%
+\newgetenv[\PRELIMSECF]{PRELIMSECF}%
+
+% Show the table of contents for the current section.
+\newcommand{\showtoc}{
+  \frame{
+    \frametitle{Overview}
+    \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide]
+  }
+}
+
+\newtheorem{massump}{Modeling Assumptions}
+
+\definecolor[named]{a-green}{RGB}{107,230,58}
+\definecolor[named]{ua-red}{RGB}{255,124,128}
+
+\definecolor[named]{berkeleydarkyellow}{RGB}{242,204,76}
+\definecolor[named]{berkeleylightyellow}{RGB}{255,255,255}
+\definecolor[named]{white}{RGB}{255,255,255}
+\definecolor[named]{black}{RGB}{0,0,0}
+\definecolor[named]{berkeleydarkblue}{RGB}{0,0,102}
+\definecolor[named]{berkeleymiddleblue}{RGB}{38,38,134}
+\definecolor[named]{berkeleylightblue}{RGB}{77,77,148}
+\definecolor[named]{gray}{RGB}{204,204,204}
+\definecolor[named]{darkgray}{RGB}{118,118,118}
+\definecolor[named]{berkeleygold}{RGB}{199,136,18}
+
+\definecolor[named]{blue}{RGB}{38,38,134}
+\definecolor[named]{darkblue}{RGB}{0,0,102}
+\definecolor[named]{lightblue}{RGB}{77,77,148}
+
+
+\newcommand{\blue}[1]{{\em \textcolor{blue}{#1}}}
+
+\newcommand{\resclfparam}{\varepsilon}
+
+\newcommand{\la}{CG}
+\newcommand{\lb}{K2}
+\newcommand{\lc}{K3}
+
+\newcommand{\AT}{AT}
+%\newcommand{\TB}{TB}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
+
+% symbol for hybrid system.
+\newcommand{\HS}{\ensuremath{\Sigma}}
+\newcommand{\HSbar}{\ensuremath{\bar{\Sigma}}}
+\newcommand{\HSeps}{\ensuremath{\HS_{\resclfparam}}}
+\newcommand{\HSepsbar}{\ensuremath{\HSbar_{\resclfparam}}}
+
+% symbol for hybrid control system
+\newcommand{\HCS}{\HS_{c}}
+\newcommand{\HCSbar}{\HSbar_{c}}
+
+% partial derivative
+\newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
+
+% tuple for hybrid system
+\newcommand{\hsystem}{\ensuremath{(\Domain, \Guard, \ResetMap, \xf)}}
+
+% tuple for hybrid control system
+\newcommand{\hcsystem}{\ensuremath{(\Domain, \ControlSet, \Guard, \ResetMap, \FG)}}
+
+% labels for stance/nonstance toes/heels
+\newcommand{\csh}{\ce_{\sh}}
+\newcommand{\cst}{\ce_{\st}}
+\newcommand{\cnsh}{\ce_{\nsh}}
+\newcommand{\cnst}{\ce_{\nst}}
+
+\newcommand{\ce}{c}
+\newcommand{\sh}{\mathrm{sh}}
+\newcommand{\st}{\mathrm{st}}
+\newcommand{\nsh}{\mathrm{nsh}}
+\newcommand{\nst}{\mathrm{nst}}
+
+% domain labels
+\newcommand{\DA}{\ts}
+\newcommand{\DB}{\tl}
+\newcommand{\DC}{\hl}
+\newcommand{\DD}{\hs}
+\newcommand{\ts}{\ensuremath{\mathit{ts}}}
+\newcommand{\tl}{\ensuremath{\mathit{tl}}}
+\newcommand{\hl}{\ensuremath{\mathit{hl}}}
+\newcommand{\hs}{\ensuremath{\mathit{hs}}}
+\newcommand{\Domain}{\D}
+\newcommand{\ControlSet}{\U}
+\newcommand{\Guard}{\S}
+\newcommand{\DGraph}{\ensuremath{\Gamma}}
+\newcommand{\ResetMap}{\ensuremath{\Delta}}
+\newcommand{\F}{\ensuremath{\xf}}
+\newcommand{\FG}{\ensuremath{\xf, \xg}}
+\newcommand{\ConfigurationSpace}{\Q}
+\newcommand{\StateSpace}{\X}
+\newcommand{\ContactSet}{\ensuremath{\mathcal{C}}}
+% executions
+\newcommand{\executionHS}{\ensuremath{\chi^{\HS}}}
+\newcommand{\periodicHS}{\ensuremath{\rho^{\HS}}}
+\newcommand{\Ical}{\ensuremath{\mathcal{I}}}
+\newcommand{\Xcal}{\ensuremath{\mathcal{X}}}
+\newcommand{\Ccal}{\ensuremath{\mathcal{C}}}
+
+% real numbers
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Rnn}{\R_{\geq 0}}
+\newcommand{\Rpd}{\R_{> 0}}
+\newcommand{\Rn}{\R^{\ncfg}}
+
+% natural numbers
+\newcommand{\Nat}{\ensuremath{\mathbb{N}}}
+
+% integers
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+
+% configurations
+\newcommand{\q}{\ensuremath{q}}
+\newcommand{\qe}{\ensuremath{\q_{e}}}
+
+% velocities
+\newcommand{\dq}{\ensuremath{\dot q}}
+\newcommand{\dqe}{\ensuremath{\dq_{e}}}
+
+% acceleration
+\newcommand{\ddq}{\ensuremath{\ddot q}}
+
+% control input
+\newcommand{\uu}{\ensuremath{u}}
+
+% symbol used to represent Lagrangians
+\newcommand{\Lagrangian}{\ensuremath{\mathcal{L}}}
+
+% symbol used to represent Jacobian matrices
+\newcommand{\Jacobian}{\ensuremath{J}}
+
+% holonomic constraint tuple
+\newcommand{\Thc}{\ensuremath{\boldsymbol \hc}}
+
+% holonomic constraint implicit map, i.e., \eta(q, \dq) = 0.
+\newcommand{\hc}{\ensuremath{\eta}}
+
+% unilateral constraint map
+\newcommand{\uc}{\ensuremath{h}}
+
+% potential energy
+\newcommand{\V}{\ensuremath{V}}
+
+\newcommand{\D}{\ensuremath{D}}
+
+% Coriolis Jacobian to find wrench for to dynamic model, i.e. C(q, qdot) * qdot
+\newcommand{\C}{\ensuremath{C}}
+
+\newcommand{\M}{M}
+\newcommand{\B}{B}
+
+% wrench resulting from gravity
+\newcommand{\G}{\ensuremath{G}}
+
+\newcommand{\VertexSet}{\ensuremath{\mathcal{V}}}
+\newcommand{\EdgeSet}{\ensuremath{\mathcal{E}}}
+
+
+% symbol for wrenches
+\newcommand{\wrench}{\ensuremath{F}}
+
+% torque distribution matrix
+\newcommand{\W}{\ensuremath{W}}
+\newcommand{\Wdot}{\ensuremath{{\dot \W}}}
+\newcommand{\Wp}{\ensuremath{\W^{+}}}
+
+% dimension of configuration space
+\newcommand{\ncfg}{\ensuremath{n}}
+
+% dimension of control set/number of actuators 
+\newcommand{\nact}{\ensuremath{m}}
+
+% number of holonomic constraints
+\newcommand{\nhc}{\ensuremath{\ell}}
+
+% domain breakdown map
+\newcommand{\Br}{\ensuremath{\mathcal{B}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% DEPRECATED FUNCTIONS %%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% These may still appear but should be phased out. Generally
+% these functions map to their replacements, but they may be
+% removed in a future version entirely.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% DEPRECATED - unilateral constraints
+\newcommand{\ucvec}{\ensuremath{\uc}}
+
+% DEPRECATED - holonomic constraints
+\newcommand{\hcvec}{\hc}
+
+% DEPRECATED - degree of actuation
+\newcommand{\idxin}{\nact}
+
+% DEPRECATED - Lagrangian
+\newcommand{\lahc}{\Lagrangian}
+
+\newcommand{\Lt}{\Lagrangian_{\mathrm{fct}}}
+\newcommand{\Vt}{V_{\mathrm{fct}}}
+\newcommand{\fLt}{f_{\Lt}}
+\newcommand{\fLg}{f_{\Llambda}}
+\newcommand{\Jfcn}{\ensuremath{J(\theta,\varphi,\dot{\theta},\dot{\varphi})}}
+
+
+\newcommand{\Vd}{V_d}
+\newcommand{\Vlambda}{V_{\lambda}}
+\newcommand{\Llambda}{\Lagrangian_{\lambda}}
+\newcommand{\Wlambda}{W_{\lambda}}
+\newcommand{\Mlambda}{M_{\lambda}}
+
+\newcommand{\thetadot}{\dot{\theta}}
+\newcommand{\thetadotdot}{\ddot{\theta}}
+\newcommand{\phidotdot}{\ddot{\phi}}
+\newcommand{\phidot}{\dot{\phi}}
+
+\newcommand{\Mtheta}{\ensuremath{M_{\theta}}}
+\newcommand{\Mphi}{\ensuremath{m_{\varphi}}}
+\newcommand{\Mphitheta}{\ensuremath{M_{\varphi,\theta}}}
+
+\newcommand{\EL}[2]{\ensuremath{\mathcal{E\!L}_{#1} (#2)}}
+\newcommand{\ddt}{\ensuremath{\frac{d}{dt}}}
+\newcommand{\cq}[1]{\ensuremath{q_{#1}}}
+\newcommand{\cdq}[1]{\ensuremath{\dot{q}_{#1}}}
+\newcommand{\cddq}[1]{\ensuremath{\ddot{q}_{#1}}}
+\newcommand{\Fext}{\ensuremath{\Upsilon(\cq{},\cdq{})}}
+\newcommand{\Fextt}{\ensuremath{\Upsilon(\theta,\dot{\theta})}}
+\newcommand{\mMlI}{\ensuremath{M^{-1}_\lambda(\cq{})}}
+\newcommand{\mMl}{\ensuremath{M_\lambda(\cq{})}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\HF}[1]{{\bf O#1}}
+\newcommand{\Oa}{v_\mathit{hip}^{x}(\theta)}
+\newcommand{\Ob}{m_\mathit{nsl}(\theta)}
+\newcommand{\Oc}{\theta_\mathit{sk}}
+\newcommand{\Od}{\theta_\mathit{nsk}}
+\newcommand{\Oe}{\theta_\mathit{T}(\theta)}
+
+\newcommand{\PHZD}{\ensuremath{\mathbf{PZ}}}
+\newcommand{\HZD}{\ensuremath{\mathbf{Z}}}
+
+\newcommand{\ResetMapFull}{\ensuremath{\ResetMap_{\lfull}}}
+\newcommand{\ResetMapReduced}{\ensuremath{\ResetMap_{\lred}}}
+
+\newcommand{\GuardFull}{\Guard_{\lfull}}
+\newcommand{\GuardReduced}{\Guard_{\lred}}
+
+\newcommand{\lred}{\mathrm{2D}}
+\newcommand{\lfull}{\mathrm{3D}}
+
+\newcommand{\fr}{\ensuremath{f_\mathrm{2D}}}
+\newcommand{\gr}{\ensuremath{g_\mathrm{2D}}}
+
+\newcommand{\usagarg}{\ensuremath{K_\mathrm{2D}^{\gSW}(\theta,\dot{\theta})}}
+
+\newcommand{\Lfd}{\ensuremath{\Lagrangian_\mathrm{3D}}}
+\newcommand{\Lfda}{\ensuremath{\Lfd(\cq{},\cdq{})}}
+\newcommand{\Lrd}{\ensuremath{\Lagrangian_\mathrm{2D}}}
+\newcommand{\Vu}{\ensuremath{V_\mathrm{3D}(\cq{})}}
+
+\newcommand{\Mth}{\ensuremath{\Mtheta(\theta)}}
+\newcommand{\mMu}{\ensuremath{M_\mathrm{3D}(\cq{})}}
+
+\DeclareMathOperator*{\blkdiag}{blk\,diag}
+
+\newcommand{\gSW}{\ensuremath{A}}
+\newcommand{\gLS}{\ensuremath{\alpha}}
+\newcommand{\gZD}{\ensuremath{\epsilon}}
+\newcommand{\gHZ}{\gZD}
+\newcommand{\flt}{\ensuremath{f_\mathrm{2D}^{\gSW}(\theta,\dot{\theta})}}
+
+\newcommand{\Lclf}{\ensuremath{\mathit{clf}}}
+\newcommand{\Llim}{\ensuremath{\mathit{lim}}}
+
+\newcommand{\Aclf}{A_{\Lclf}}
+\newcommand{\bclf}{b_{\Lclf}}
+
+\newcommand{\Alim}{A_{\Llim}}
+\newcommand{\blim}{b_{\Llim}}
+
+
+% From acc paper
+\newcommand{\orbit}{\mathscr O}
+
+\newcommand{\x}{\chi}
+\newcommand{\dx}{{\dot \x}}
+\newcommand{\xst}{\x^{*}}
+\newcommand{\xp}{\x^{+}}
+\newcommand{\xm}{\x^{-}}
+\newcommand{\xo}{\x^{\orbit}}
+
+\newcommand{\nx}{\|\x\|}
+
+\newcommand{\qp}{\q^{+}}
+\newcommand{\dqp}{\dq^{+}}
+\newcommand{\qm}{\q^{-}}
+\newcommand{\dqm}{\dq^{-}}
+
+\newcommand{\art}{(t)}
+\newcommand{\artau}{(\tau)}
+\newcommand{\arzero}{(0)}
+
+\newcommand{\argsq}{(\q)}
+\newcommand{\argsdq}{(\dq)}
+\newcommand{\argsqdq}{(\q, \dq)}
+\newcommand{\argsqdqW}{(\q, \dq, \W)}
+\newcommand{\arx}{(\x)}
+\newcommand{\arxt}{(\x\art)}
+\newcommand{\arxzero}{(\x\arzero)}
+\newcommand{\argsqm}{(\qm)}
+\newcommand{\argsqdqm}{(\qm, \dqm)}
+
+
+\newcommand{\arxW}{(\x, \W)}
+
+\newcommand{\argsqdqtau}{(\q\artau, \dq\artau)}
+\newcommand{\argsqtau}{(\q\artau)}
+
+\newcommand{\argsqdqt}{(\q\art, \dq\art)}
+\newcommand{\argsqt}{(\q\art)}
+
+\newcommand{\xf}{F}
+\newcommand{\xg}{G}
+
+\newcommand{\xfbar}{{\bar \xf}}
+\newcommand{\xgbar}{{\bar \xg}}
+
+\newcommand{\Lie}[1]{L_{#1}}
+
+\newcommand{\U}{\mathcal{U}}
+
+\newcommand{\T}{\mathbb{T}}
+\newcommand{\Q}{\mathcal{Q}}
+\newcommand{\X}{\mathcal{X}}
+
+\newcommand{\K}{K}
+\newcommand{\Keps}{\K_{\resclfparam}}
+\newcommand{\mueps}{\mu_{\resclfparam}}
+
+\renewcommand{\P}{P}
+\newcommand{\Pe}{\P_{\resclfparam}}
+\newcommand{\Pex}{\Pe^{\zdx}}
+\newcommand{\Pez}{\Pe^{\zdz}}
+
+\newcommand{\dV}{{\dot \V}}
+
+\newcommand{\Ve}{\V_{\resclfparam}}
+\newcommand{\dVe}{\dV_{\resclfparam}}
+
+\newcommand{\Vn}{\V_{\mathit{n}}}
+\newcommand{\VP}{\V_{\Pe}}
+
+\renewcommand{\S}{S}
+
+\newcommand{\Vebar}{\Vbar_{\resclfparam}}
+\newcommand{\VeS}{\left.\Ve\right|_{\S}}
+\newcommand{\Vex}{\V_{\resclfparam, \zdX}}
+\newcommand{\Vee}{\Vex}
+
+
+\newcommand{\argsxz}{(\zdx, \zdz)}
+\newcommand{\argsxzti}[1]{(\zdx_{#1}\art, \zdz_{#1}\art)}
+\newcommand{\argsxzizero}[1]{(\zdx_{#1}\arzero, \zdz_{#1}\arzero)}
+\newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}\art, {\dot \zdz}_{#1}\art)}
+\newcommand{\argsx}{(\zdx)}
+\newcommand{\argsz}{(\zdz)}
+
+\newcommand{\taueps}{\tau^{\resclfparam}}
+\newcommand{\taurho}{\tau^{\rho}}
+
+\newcommand{\argsxzt}{(\zdx\art, \zdz\art)}
+\newcommand{\argsxztau}{(\zdx\artau, \zdz\artau)}
+\newcommand{\argsmuxz}{(\mu_{1}, \mu_{2}, \zdx, \zdz)}
+\newcommand{\argstxzi}[2]{(\zdx_{#2}(#1), \zdz_{#2}(#1))}
+\newcommand{\argsxzprime}{(\zdx', \zdz')}
+\newcommand{\argsxzstprime}{(\zdx', \zdz'-\zdzst)}
+
+\newcommand{\zdzst}{\zdz^{*}}
+\newcommand{\argsxzst}{(\zdx, \zdz - \zdzst)}
+
+
+\newcommand{\nzdxz}{\left\|\argsxz\right\|}
+\newcommand{\nzdxzst}{\left\|\argsxzst\right\|}
+
+
+\newcommand{\nzdx}{\left|\zdx\right|}
+\newcommand{\nzdz}{\left\|\zdz\right\|}
+\newcommand{\nzdxzprime}{\left\|\argsxzprime\right\|}
+\newcommand{\nzdxzstprime}{\left\|\argsxzstprime\right\|}
+
+\newcommand{\nzdxt}{|\zdx\artau|}
+\newcommand{\nzdxzero}{|\zdx\arzero|}
+\newcommand{\nzdzst}{\left\|\zdz - \zdzst\right\|}
+
+\newcommand{\argszero}{(0, \boldzero)}
+
+\newcommand{\TI}{T_{I}}
+\newcommand{\TIe}{\TI^{\resclfparam}}
+\newcommand{\Tst}{T^{*}}
+\newcommand{\TB}{T_{B}}
+
+\newcommand{\TIDelta}{\TI(\Delta\argsxz)}
+\newcommand{\TIeDelta}{\TIe(\Delta\argsxz)}
+
+\newcommand{\DeltaX}{\Delta_{\zdX}}
+\newcommand{\DeltaZ}{\Delta_{\zdZ}}
+
+\newcommand{\Deltaxz}{\Delta\argsxz}
+\newcommand{\argsDeltaxz}{(\Delta\argsxz)}
+\newcommand{\nDeltaxz}{\left\|\Delta\argsxz\right\|}
+
+\newcommand{\LDelta}{L_{\Delta}}
+\newcommand{\LB}{L_{B}}
+\newcommand{\LTI}{L_{\TI}}
+\newcommand{\LTIeps}{L_{\TIe}(\resclfparam)}
+\newcommand{\LP}{L_{P}}
+\newcommand{\Le}{\Lambda(\resclfparam)}
+
+\newcommand{\Ae}{A_{P}(\resclfparam)}
+\newcommand{\ATI}{A_{\TI}}
+\newcommand{\ATIe}{\ATI(\resclfparam)}
+\newcommand{\bepsone}{\beta_{1}(\resclfparam)}
+\newcommand{\bepstwo}{\beta_{2}(\resclfparam)}
+
+\newcommand{\flow}{\phi}
+\newcommand{\flowt}{\flow_{t}}
+\newcommand{\flowtx}{\flowt^{x}}
+\newcommand{\flowtz}{\flowt^{z}}
+
+
+\newcommand{\floweps}{\flow^{\resclfparam}}
+\newcommand{\flowepst}{\floweps_{t}}
+
+\newcommand{\bigF}{\Phi}
+\newcommand{\bigG}{\Gamma}
+
+\newcommand{\zdX}{X}
+\newcommand{\zdZ}{Z}
+
+\newcommand{\zdx}{x}
+\newcommand{\zdz}{z}
+
+\newcommand{\dzdx}{{\dot \zdx}}
+\newcommand{\dzdz}{{\dot \zdz}}
+
+
+\newcommand{\E}{E}
+\newcommand{\Ec}{\E_{c}}
+\newcommand{\Es}{\E^{*}}
+\newcommand{\Eref}{\E_{\mathrm{ref}}}
+
+\newcommand{\xrem}{(\q_{1}, \ \ldots, \ q_{n}, \ \dq_{1}, \ \ldots, \
+  \dq_{n-1})}
+\newcommand{\xremW}{(\q_{1}, \ \ldots, \ q_{n}, \ \dq_{1}, \ \ldots, \
+  \dq_{n-1}, \ \W)}
+
+\newcommand{\boldzero}{{\mathbf 0}}
+
+\newcommand{\xzst}{(0, \zdz^{*})}
+
+\newcommand{\Poincare}{Poincar{\'e}}
+
+\newcommand{\tti}{time-to-impact}
+\newcommand{\TtI}{Time-to-Impact}
+
+\newcommand{\stabletube}{\Omega}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\lambdamax}{\lambda_{\max}}
+\DeclareMathOperator*{\lambdamin}{\lambda_{\min}}
+
+\newcommand{\lambdamaxG}{\bigG_{\max}}
+\newcommand{\lambdaminG}{\bigG_{\min}}
+
+\newcommand{\supF}{\bigF_{\max}}
+
+\newcommand{\limeps}{\lim_{\resclfparam \nearrow +\infty}}
+
+\newcommand{\xform}{\Psi}
+
+\newcommand{\etaeps}{\eta_{\resclfparam}}
+
+\newcommand{\CG}{H}
+
+\newcommand{\vv}{v}
+
+\newcommand{\pspace}{\hphantom{^{+}}}
+
+\newcommand{\vfR}{\ensuremath{R}}
+
+\newcommand{\Deltaq}{\ensuremath{\Delta_{\q}}}
+\newcommand{\Deltadq}{\ensuremath{\Delta_{\dq}}}
+\newcommand{\DeltaW}{\ensuremath{\Delta_{\W}}}
+
+\newcommand{\neps}{\left\|\tfrac{1}{\resclfparam}\right\|}
+\newcommand{\nrho}{\|\rho\|}
+\newcommand{\flowrho}{\flow^{\rho}}
+\newcommand{\flowrhot}{\flow^{\rho}_{t}}
+
+
+\newcommand{\sQ}{\mathcal{Q}}
+\newcommand{\nc}{\mathit{nc}}

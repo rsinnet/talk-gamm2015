@@ -9,7 +9,10 @@
 *.out
 *.toc
 *.tdo
+*.nav
+*.snm
 gamm2015_sinnet_ames.pdf
+gamm2015_sinnet_ames_talk.pdf
 *.bak
 auto/
 myrefs.bib

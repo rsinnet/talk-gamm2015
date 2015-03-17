@@ -1,9 +1,13 @@
 PROJNAME=gamm2015_sinnet_ames
+TALKNAME=gamm2015_sinnet_ames_talk
 LATEX_CMD=latex -interaction=nonstopmode
 PDFLATEX_CMD=pdflatex -interaction=nonstopmode
 
 EPS_ALL := $(wildcard figs/*.eps)
 EPS_TEX := $(wildcard figs/*.eps_tex)
+
+PDF_FIGS := $(wildcard figs/*.pdf)
+MP4_VIDS := $(wildcard figs/*.mp4)
 
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))
@@ -16,7 +20,9 @@ else
   RM:=rm -f
 endif
 
-$(PROJNAME).pdf: $(PROJNAME).ps
+all: $(PROJNAME).pdf $(TALKNAME).pdf
+
+%.pdf: %.ps
 	ps2pdf $<
 
 %.ps: %.dvi
@@ -25,6 +31,10 @@ $(PROJNAME).pdf: $(PROJNAME).ps
 %.dvi: %.aux
 	$(LATEX_CMD) $(basename $<)
 	$(LATEX_CMD) $(basename $<)
+
+$(TALKNAME).pdf: $(TALKNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) $(PDF_FIGS)
+	$(PDFLATEX_CMD) $<
+	$(PDFLATEX_CMD) $<
 
 $(PROJNAME).aux: $(PROJNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) myrefs.bib
 	$(LATEX_CMD) $<
@@ -36,8 +46,8 @@ myrefs.bib: refs.bib format_bibtex_months
 figs/%.eps_latex: figs/%.eps_tex figs/%.eps figs/do_latex_subs.py figs/latex_subs.json
 	$(MAKE) -C figs/ $(notdir $@)
 
-.PHONY: clean
+.PHONY: all clean
 
 clean:
-	$(RM) myrefs.bib $(PROJNAME).pdf *.dvi *.ps *.bbl *.aux *.out
+	$(RM) myrefs.bib $(TALKNAME).pdf $(PROJNAME).pdf *.dvi *.ps *.bbl *.aux *.out
 	$(MAKE) -C figs/ clean
