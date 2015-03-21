@@ -139,13 +139,13 @@
   \frametitle{Hybrid Flows}
   A \alert{hybrid flow} of \HS is a tuple
   \begin{align*}
-    \executionHS = \left( \ResetMap, \mathscr{I}, \mathscr{C} \right),
+    \executionHS = \left( \HybridIndex, \HybridInterval, \HybridCurves \right),
   \end{align*}
   \vspace{-2em}
   \begin{itemize}
-  \item $\ResetMap = \{0, 1, 2, \ldots\} \subseteq \Nat$ is a finite or infinite \blue{indexing set},
-  \item $\mathscr{I} = \{I_{i} \}_{i \in \ResetMap}$ is a \blue{hybrid interval} where $I_{i} = [\tau_{i}, \tau_{i + 1}]$,
-  \item $\mathscr{C} = \{c_{i} \}_{i \in \ResetMap}$ is a \blue{collection of solutions} of $\xf$, i.e., ${\dot c}_{i}\art = \xf(c_{i}\art)$ $\forall i \in \ResetMap$.
+  \item $\HybridIndex = \{0, 1, 2, \ldots\} \subseteq \Nat$ is a finite or infinite \blue{indexing set},
+  \item $\HybridInterval = \{I_{i} \}_{i \in \HybridIndex}$ is a \blue{hybrid interval} where $I_{i} = [\tau_{i}, \tau_{i + 1}]$,
+  \item $\HybridCurves = \{c_{i} \}_{i \in \HybridIndex}$ is a \blue{collection of solutions} of $\xf$, i.e., ${\dot c}_{i}\art = \xf(c_{i}\art)$ $\forall i \in \HybridIndex$.
   \end{itemize}
 
   \only<1>{
@@ -158,9 +158,9 @@
   }
 
   \only<2>{
-    In addition, for every $i, i + 1 \in \ResetMap$, it is required that
+    In addition, for every $i, i + 1 \in \HybridIndex$, it is required that
     \begin{enumerate}
-    \item $c_{i}(\tau_{i+1}) \in G$ and
+    \item $c_{i}(\tau_{i+1}) \in \Guard$ and
     \item $\ResetMap(c_{i}(\tau_{i+1})) = c_{i+1}(\tau_{i+1})$
     \end{enumerate}
   }

@@ -1,2 +1,40 @@
 \section{Introduction}
 \showtoc
+
+%\subsection{Motivation}
+
+\begin{frame}[t]
+  \frametitle{Motivation}
+  \only<1> {
+    \begin{block}{Goal}
+      Design an optimal controller to shape the energy dynamics of periodic
+      behaviors in mechanical systems without destroying stability.
+    \end{block}
+
+    \begin{block}{Considerations}
+      \begin{itemize}
+      \item Should work on systems with impulse effects
+      \item Should be computationally tractable
+      \item Should not alter the steady-state periodic behavior
+      \item Control law should be guaranteed to exist at least locally
+      \end{itemize}
+    \end{block}
+  }
+
+  \only<2>{
+    \begin{block}{Problem}
+      Certain controllers induce periodic behaviors \red{but}
+      altering gains can change overall trajectory.
+    \end{block}
+      
+    \begin{block}{Question}
+      How can we make such controllers more robust without altering the
+      steady-state behavior?
+    \end{block}
+
+    \begin{block}{Solution}
+      Take advantage of the periodic nature of energy to stabilize the energy
+      dynamics.
+    \end{block}
+  }
+\end{frame}
