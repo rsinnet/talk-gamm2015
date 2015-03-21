@@ -8,8 +8,8 @@ TALKSRC := $(TALKNAME).tex $(wildcard sections/*.tex) gamm.sty
 EPS_ALL := $(wildcard figs/*.eps)
 EPS_TEX := $(wildcard figs/*.eps_tex)
 
-PDF_FIGS := $(wildcard figs/*.pdf)
 MP4_VIDS := $(wildcard figs/*.mp4)
+IMG_FIGS := $(wildcard figs/*.jpg) $(wildcard figs/*.png) $(wildcard figs/*.pdf)
 
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))
@@ -38,7 +38,7 @@ $(PROJNAME).aux: $(PROJNAME).tex $(EPS_LATEX) $(EPS_NO_LATEX) myrefs.bib
 	$(LATEX_CMD) $<
 	bibtex $(basename $<)
 
-$(TALKNAME).pdf: $(TALKSRC) $(EPS_LATEX) $(EPS_NO_LATEX) $(PDF_FIGS)
+$(TALKNAME).pdf: $(TALKSRC) $(EPS_LATEX) $(EPS_NO_LATEX) $(IMG_FIGS)
 	$(PDFLATEX_CMD) $<
 	$(PDFLATEX_CMD) $<
 
