@@ -109,7 +109,9 @@
 
 \begin{frame}[t]
   \frametitle{Impact Dynamics}
-  Introduce extended coordinates $\qe = (X, \q) \in \SE(3) \times \ConfigurationSpace$ which contains the kinematics of a reference point on the robot. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
+  Introduce extended coordinates $\qe = (X, \q) \in \SE(3) \times
+  \ConfigurationSpace$ which contain the kinematics of a reference point on the
+  robot. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
   \begin{massump}
     \vspace{-.3em}
     \begin{itemize}
@@ -183,9 +185,9 @@
   For a conservative system, total energy is conserved; i.e.:
   \begin{align*}
     \Ec &= \Tnrg\argsqdq + \Unrg\argsq\\
-    &= \E(q(0), \dot q(0)) = \Ez
+    &= \E(q(0), \dot q(0)) = \Ez.
   \end{align*}
-  Dynamical motion for such a system relies on the interplay between kinetic and potential energy, which is expressed in the Euler-Lagrange equation,
+  Dynamical motion for such a system relies on the interplay between kinetic and potential energy, which is expressed in the Euler--Lagrange equation,
   \begin{align*}
     \frac{d}{dt} \pd{\Lagrangian}{\dq} - \pd{\Lagrangian}{\q} = 0.
   \end{align*}
@@ -203,7 +205,7 @@
       \end{align*}
       Control Law:
       \begin{align*}
-        \uu = 0.
+        \uu = 0
       \end{align*}
       \column{1.5in}
       \begin{figure}%width=1.0\columnwidth,
@@ -250,7 +252,7 @@
   $\wrench_{\nc} \cdot dq$. Thus, the following quantity is conserved:
   \begin{align*}
     \Ec &= \Tnrg\argsqdq + \Unrg\argsq - \int_{t_{0}}^{t} \! \wrench_{\nc} \cdot \frac{dq}{d\tau} \ d\tau\\
-    &= \E(q(0), \dot q(0)) = \Ez
+    &= \E(q(0), \dot q(0)) = \Ez.
   \end{align*}
   This equation expresses the interplay between kinetic and potential energy and the flow of energy into and out of the system.
 \end{frame}
@@ -260,7 +262,7 @@
   \frametitle{Example: 3-Link Biped}
   \only<1>{
     \begin{columns}
-      \column{1.5in}
+      \column{1.8in}
       Dynamic Model:
       \begin{align*}
         \M\argsq \ddq + \CG\argsqdq = \B\argsq \uu
@@ -268,8 +270,7 @@
       Control Law:
       \begin{align*}
         \uu &= \G\argsq - \G(\Psi\argsq)\\
-        \uu_3 &=-\ck_{d} (\dot \vartheta_{T}^{a})\\
-        &\hspace{1.8em} -\ck_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d})
+        \uu_3 &=-\ck_{d} (\dot \vartheta_{T}^{a}) -\ck_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d})
       \end{align*}
       \column{1.5in}
       \begin{figure}
@@ -277,7 +278,7 @@
         \def\svgwidth{1.0\columnwidth}
         \input{cg2d-3link-model.eps_latex}
         \vspace{-2em}
-        \caption{3-link biped configuration.}
+        \caption{3-link biped configuration}
       \end{figure}
     \end{columns}
   }
@@ -286,11 +287,19 @@
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_cg2d_3link}
-      \caption{Energy is not conserved as the controller injects energy.}
+      \caption{Total energy is not conserved as the controller injects energy.}
     \end{figure}
   }
 
-  \only<3>{
+    \only<3>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_conserved_cg2d_3link}
+      \caption{Adding the energy storage term results in a conserved quantity.}
+    \end{figure}
+  }
+
+  \only<4>{
     \begin{figure}
       \includemedia[
       %width=1.0\columnwidth,

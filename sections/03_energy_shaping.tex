@@ -106,7 +106,8 @@
               \end{array} \right\} & \mbox{if } \argsqdq \in \S.
           \end{array}\right.
       \end{align*}
-      For such a system, the following quantity is conserved:
+      For such a system, the following quantity is conserved (through the
+      continuous dynamics):
       \begin{align*}
         \Ec\argsqdqW := \Tnrg\argsqdq + \Unrg\argsq - W.
       \end{align*}
@@ -116,17 +117,17 @@
 
 \begin{frame}[t]
   \frametitle{Rapidly Exponentially Stabilizing CLFs}
-  A \blue{rapidly exponentially stability control Lyapunov function (\RESCLF)}
-  $\Ve : \X \to \Rnn$ satisfies
+  A \blue{rapidly exponentially stabilizing control Lyapunov function (\RESCLF)}
+  $\Ve : \X \to \Rnn$ satisfying
   \begin{align*}
     &\cc_{1} \nx^{2} \leq \Ve\arx \leq \frac{\cc_{2}}{\resclfparam^{2}} \nx^{2},\\
     &\inf_{\uu \in \U} \Lie{\xfbar}\Ve\arx + \Lie{\xgbar}\Ve\arx \, \uu +
     \frac{\cc_{3}}{\resclfparam} \Ve\arx \leq 0
   \end{align*}
-  for $\cc_{1}, \cc_{2}, \cc_{3} > 0$ exhibits exponential convergence. If the above
-  are satisfied, then it is also true that
+  for $\cc_{1}, \cc_{2}, \cc_{3} > 0$ guarantees exponential convergence of
+  \xt, i.e.,
   \begin{align*}
-    \left\| \pd{\Ve\arx}{\x} \right\| \leq \cc_{4} \nx.
+    \| \xt \| \leq \| \xz \| e^{-\frac{\cc_{3}}{\resclfparam} t} \mbox{ for } t \geq 0.
   \end{align*}
 \end{frame}
 
