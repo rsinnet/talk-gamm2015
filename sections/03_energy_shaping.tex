@@ -118,16 +118,15 @@
 \begin{frame}[t]
   \frametitle{Rapidly Exponentially Stabilizing CLFs}
   A \blue{rapidly exponentially stabilizing control Lyapunov function (\RESCLF)}
-  $\Ve : \X \to \Rnn$ satisfying
+  $\V : \X \to \Rnn$ satisfying
   \begin{align*}
-    &\cc_{1} \nx^{2} \leq \Ve\arx \leq \frac{\cc_{2}}{\resclfparam^{2}} \nx^{2},\\
-    &\inf_{\uu \in \U} \Lie{\xfbar}\Ve\arx + \Lie{\xgbar}\Ve\arx \, \uu +
-    \frac{\cc_{3}}{\resclfparam} \Ve\arx \leq 0
+    &\cc_{1} \nx^{2} \leq \V\arx \leq \frac{\cc_{2}}{\resclfparam^{2}} \nx^{2},\\
+    &\inf_{\uu \in \U} \Lie{\xfbar}\V\arx + \Lie{\xgbar}\V\arx \, \uu +
+    \frac{\cc_{3}}{\resclfparam} \V\arx \leq 0
   \end{align*}
-  for $\cc_{1}, \cc_{2}, \cc_{3} > 0$ guarantees exponential convergence of
-  \xt, i.e.,
+  for $\cc_{1}, \cc_{2}, \cc_{3} > 0$ guarantees exponential convergence of $\V\arx$, i.e.,
   \begin{align*}
-    \| \xt \| \leq \| \xz \| e^{-\frac{\cc_{3}}{\resclfparam} t} \mbox{ for } t \geq 0.
+    \V\arxt \leq \V(\xz) e^{-\frac{\cc_{3}}{\resclfparam} t} \mbox{ for } t \geq 0.
   \end{align*}
 \end{frame}
 
@@ -141,20 +140,23 @@
   with $\Eref$ the constant energy level of the system on the orbit
   \orbit. For a \RESCLF, we seek a feedback control law, $\mu\arx$, such that
   \begin{align*}
-    \Lie{\xfbar} V\arx + \Lie{\xgbar} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
+    \Lie{\xfbar} V\arx + \Lie{\xgbar} \V\arx \, \mu\arx + \frac{\cc_{3}}{\resclfparam} \V\arx &\leq 0.
   \end{align*}
 \end{frame}
 
 \begin{frame}[t]
   \frametitle{Quadratic Program Formulation}
   The linear form of the \RESCLF condition suggests
-  \begin{align}
-    \nonumber
+  \begin{align*}
     \mueps\arx = \argmin_{\uu \in \R^{n}}  \, & \uu^T \uu,\\
     \mbox{s.t. } & \Aclf\arx \, \uu \leq \bclf\arx
-  \end{align}
+  \end{align*}
   which encodes the dynamics of the system. This controller imposes exponential
-  stabilization of the energy as defined by the \RESCLF.
+  stabilization of the energy, i.e.,
+  \begin{align*}
+    \nxt \leq \frac{1}{\resclfparam}
+    \sqrt{\frac{\cc_{2}}{\cc_{1}}} \nxz e^{-\frac{c_{3}}{2\resclfparam} t}.
+  \end{align*}
 \end{frame}
 
 \begin{frame}[t]
@@ -266,7 +268,7 @@
         activate=pageopen,
         flashvars={source=cg2d_es.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
-      \caption{Energy shaping to stabilize to a gait from distant initial condition.}
+      \caption{Energy shaping to stabilize a gait from a distant initial condition.}
     \end{figure}
   }
 
@@ -311,7 +313,7 @@
         \def\svgwidth{1.0\columnwidth}
         \input{cg2d-3link-model.eps_latex}
         \vspace{-2em}
-        \caption{3-link biped configuration.}
+        \caption{3-link biped configuration}
       \end{figure}
     \end{columns}
   }
@@ -345,7 +347,7 @@
         activate=pageopen,
         flashvars={source=3link_es.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
-      \caption{Energy shaping to stabilize to a gait from distant initial condition.}
+      \caption{Energy shaping to stabilize a gait from a distant initial condition.}
     \end{figure}
   }
 
@@ -436,7 +438,7 @@
         activate=pageopen,
         flashvars={source=7link_es.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
-      \caption{Energy shaping to stabilize to a gait.}
+      \caption{Energy shaping to stabilize a gait.}
     \end{figure}
   }
 
